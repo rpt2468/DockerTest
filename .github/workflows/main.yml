@@ -20,3 +20,16 @@ jobs:
     - run: |
         docker build . -t craazure.azurecr.io/dockertestapp:${{ github.sha }}
         docker push craazure.azurecr.io/dockertestapp:${{ github.sha }}
+    
+    - name: Log in with Azure
+      uses: azure/login@v1
+      with:
+         creds: '${{ secrets.AZURE_CREDENTIALS }}'
+         enable-AzPSSession: true
+
+    - uses: azure/container-apps-deploy-action@v1
+      with:
+        acrName: craazure
+        containerAppName: dockertest-app-20240126191323
+        imageToDeploy: craazure.azurecr.io/dockertestapp:${{ github.sha }}
+        resourceGroup: Robin-ResourceGroup
