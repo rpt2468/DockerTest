@@ -1,0 +1,21 @@
+on: [push]
+
+name: AzureLoginSample
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log in with Azure
+        uses: azure/login@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          enable-AzPSSession: true
+      - name: Build and deploy Container App
+        uses: azure/container-apps-deploy-action@v1
+        with:
+          appSourcePath: ${{ github.workspace }}/DockerTest
+          acrName: craazure
+          containerAppName: dockertest-app-20240126191323
+          runtimeStack: 'dotnetcore:6.0'
+          resourceGroup: Robin-ResourceGroup
