@@ -17,5 +17,5 @@ jobs:
           appSourcePath: ${{ github.workspace }}/DockerTest
           acrName: craazure
           containerAppName: dockertest-app-20240126191323
-          runtimeStack: mcr.microsoft.com/oryx/dotnetcore:6.0
+          runtimeStack: 'dotnetcore:6.0'
           resourceGroup: Robin-ResourceGroup
