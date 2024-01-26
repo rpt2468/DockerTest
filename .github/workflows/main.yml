@@ -1,20 +1,22 @@
-on: [push]
+name: Build Linux Container Image and Push to ACR
 
-name: AzureLoginSample
+on:
+  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: dotnet
     steps:
-      - name: Log in with Azure
-        uses: azure/login@v1
-        with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
-          enable-AzPSSession: true
-      - name: Build and deploy Container App
-        uses: azure/container-apps-deploy-action@v1
-        with:
-          appSourcePath: ${{ github.workspace }}
-          acrName: craazure
-          containerAppName: dockertest-app-20240126191323
-          resourceGroup: Robin-ResourceGroup
+    - uses: actions/checkout@v2
+    - uses: azure/docker-login@v1
+      with:
+        login-server: craazure.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . -t craazure.azurecr.io/dockertestapp:${{ github.sha }}
+        docker push craazure.azurecr.io/dockertestapp:${{ github.sha }}
