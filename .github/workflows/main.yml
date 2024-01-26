@@ -11,8 +11,10 @@ jobs:
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           enable-AzPSSession: true
-      - name: Azure PowerShell Action
-        uses: Azure/powershell@v1
+      - name: Build and deploy Container App
+        uses: azure/container-apps-deploy-action@v1
         with:
-          inlineScript: Get-AzResourceGroup -Name "Robin-ResourceGroup"
-          azPSVersion: "latest"
+          appSourcePath: ${{ github.workspace }}
+          acrName: craazure
+          containerAppName: dockertest-app-20240126191323
+          resourceGroup: Robin-ResourceGroup
