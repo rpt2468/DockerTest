@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Dump GitHub context
         id: github_context_step
-        run: echo '${{ System.DefaultWorkingDirectory }}'
+        run: echo '${{ github.workspace }}'
       - name: Log in with Azure
         uses: azure/login@v1
         with:
@@ -17,7 +17,7 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ System.DefaultWorkingDirectory }}
+          appSourcePath: /home/runner/work/DockerTest/
           acrName: craazure
           containerAppName: dockertest-app-20240126191323
           runtimeStack: 'dotnetcore:6.0'
