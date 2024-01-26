@@ -14,7 +14,7 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: ${{ github.workspace }}
+          appSourcePath: ${{ github.workspace }}/DockerTest
           acrName: craazure
           containerAppName: dockertest-app-20240126191323
           resourceGroup: Robin-ResourceGroup
