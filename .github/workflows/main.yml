@@ -1,7 +1,7 @@
 name: Build Linux Container Image and Push to ACR
 
 on:
-  workflow_dispatch:
+  [push]
 
 jobs:
   build:
@@ -9,7 +9,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: dotnet
+        working-directory: DockerTest
     steps:
     - uses: actions/checkout@v2
     - uses: azure/docker-login@v1
