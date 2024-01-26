@@ -6,6 +6,9 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: "Echo in file"
+        run: ${{ github.workspace }}
+        shell: bash
       - name: Log in with Azure
         uses: azure/login@v1
         with:
