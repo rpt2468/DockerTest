@@ -17,8 +17,8 @@ jobs:
       - name: Build and deploy Container App
         uses: azure/container-apps-deploy-action@v1
         with:
-          appSourcePath: /home/runner/work/DockerTest/
+          appSourcePath: /home/runner/work/DockerTest
           acrName: craazure
           containerAppName: dockertest-app-20240126191323
-          runtimeStack: 'dotnetcore:6.0'
+          runtimeStack: mcr.microsoft.com/oryx/dotnetcore:6.0
           resourceGroup: Robin-ResourceGroup
