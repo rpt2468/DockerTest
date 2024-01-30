@@ -1,6 +1,6 @@
-on: [push]
+on: workflow_dispatch
 
-name: AzureLoginSample
+name: Build and Deploy container App
 
 jobs:
   build-and-deploy:
